@@ -3,8 +3,10 @@ package com.choi
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-
     println("== 명언 앱 ==")
+
+    var lastId: Int = 0
+
 
     while (true) {
         print("명령) ")
@@ -18,6 +20,7 @@ fun main() {
                 val content = readln()
                 print("작가 : ")
                 val author = readln()
+                println("${++lastId}번 명언이 등록되었습니다.")
             }
         }
     }
