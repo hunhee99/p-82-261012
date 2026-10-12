@@ -1,81 +1,31 @@
 package com.choi
 
-class App {
-    fun run() {
-        println("== 명언 앱 ==")
+class App(
+    val wiseSayingController: WiseSayingController = WiseSayingController(),
+    val systemController: SystemController = SystemController()
+) {
 
-        var lastId: Int = 0
+    fun run() {
+        var lastId = 0
         val wiseSayings = mutableListOf<WiseSaying>()
 
+        println("== 명언 앱 ==")
+
         while (true) {
+
             print("명령) ")
-            // 명령 입력
             val input = readln()
-
             val rq = Rq(input)
-
             val action = rq.actionName
 
             when (action) {
-                // 종료
-                "종료" -> break
-                // 명언 등록
-                "등록" -> {
-                    // 명언 입력
-                    print("명언 : ")
-                    val content = readln()
-
-                    // 작가 입력
-                    print("작가 : ")
-                    val author = readln()
-
-                    val id = ++lastId
-
-                    // 리스트로 저장
-                    val wiseSaying = WiseSaying(id, content, author)
-                        .also {
-                            wiseSayings.add(it)
-                        }
-
-                    // 명언 번호 출력
-                    println("${id}번 명언이 등록되었습니다.")
+                "종료" -> {
+                    systemController.exit()
+                    break
                 }
-                // 명언 목록 조회 (최신순 조회)
-                "목록" -> {
-                    println("번호 / 작가 / 명언")
-                    println("----------------------")
-                    wiseSayings
-                        .reversed()
-                        .forEach {
-                            println("${it.id} / ${it.content} / ${it.author}")
-                        }
-                }
-                // 명언 삭제
-                "삭제" -> {
-                    // 파라미터 파싱
-                    val id: Int = rq.getParamAsInt("id", 0)
-
-                    if (id == 0){
-                        println("올바른 id를 입력해주세요")
-                        continue
-                    }
-
-                    // 조회
-                    val wiseSaying = wiseSayings.firstOrNull{
-                        it.id == id
-                    }
-
-                    // 예외 처리
-                    if (wiseSaying == null) {
-                        println("${id}번 명언이 존재하지 않습니다.")
-                        continue
-                    }
-
-                    // 삭제
-                    wiseSayings.remove(wiseSaying)
-
-                    println("${id}번 명언이 삭제되었습니다.")
-                }
+                "등록" -> wiseSayingController.write()
+                "목록" -> wiseSayingController.list()
+                "삭제" -> wiseSayingController.delete(rq)
             }
         }
     }
