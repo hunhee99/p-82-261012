@@ -12,6 +12,10 @@ class App {
             // 명령 입력
             val input = readln()
 
+            val rq = Rq(input)
+
+            val action = rq.actionName
+
             when (input) {
                 // 종료
                 "종료" -> break
@@ -45,6 +49,10 @@ class App {
                         .forEach {
                             println("${it.id} / ${it.content} / ${it.author}")
                         }
+                }
+                // 명언 삭제
+                "삭제" -> {
+                    val id: Int = rq.getParamAsInt("id", 0)
                 }
             }
         }
