@@ -55,6 +55,11 @@ class App {
                     // 파라미터 파싱
                     val id: Int = rq.getParamAsInt("id", 0)
 
+                    if (id == 0){
+                        println("올바른 id를 입력해주세요")
+                        continue
+                    }
+
                     // 조회
                     val wiseSaying = wiseSayings.firstOrNull{
                         it.id == id
