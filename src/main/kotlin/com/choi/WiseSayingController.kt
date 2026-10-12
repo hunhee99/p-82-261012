@@ -44,7 +44,6 @@ class WiseSayingController(
     }
 
     fun modify(rq: Rq) {
-
         val id = rq.getParamAsInt("id", 0)
 
         if (id == 0) {
