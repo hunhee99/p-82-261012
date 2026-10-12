@@ -5,7 +5,7 @@ class App {
         println("== 명언 앱 ==")
 
         var lastId: Int = 0
-
+        val wiseSayings = mutableListOf<WiseSaying>()
 
         while (true) {
             print("명령) ")
@@ -20,11 +20,25 @@ class App {
                     // 명언 입력
                     print("명언 : ")
                     val content = readln()
+
                     // 작가 입력
                     print("작가 : ")
                     val author = readln()
+
+                    val id = ++lastId
+
+                    // 리스트로 저장
+                    val wiseSaying = WiseSaying(id, content, author)
+                        .also {
+                            wiseSayings.add(it)
+                        }
+
                     // 명언 번호 출력
-                    println("${++lastId}번 명언이 등록되었습니다.")
+                    println("${id}번 명언이 등록되었습니다.")
+                }
+                // 명언 목록 조회
+                "목록" -> {
+
                 }
             }
         }
