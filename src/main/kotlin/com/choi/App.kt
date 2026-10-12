@@ -16,7 +16,7 @@ class App {
 
             val action = rq.actionName
 
-            when (input) {
+            when (action) {
                 // 종료
                 "종료" -> break
                 // 명언 등록
@@ -52,7 +52,24 @@ class App {
                 }
                 // 명언 삭제
                 "삭제" -> {
+                    // 파라미터 파싱
                     val id: Int = rq.getParamAsInt("id", 0)
+
+                    // 조회
+                    val wiseSaying = wiseSayings.firstOrNull{
+                        it.id == id
+                    }
+
+                    // 예외 처리
+                    if (wiseSaying == null) {
+                        println("${id}번 명언이 존재하지 않습니다.")
+                        continue
+                    }
+
+                    // 삭제
+                    wiseSayings.remove(wiseSaying)
+
+                    println("${id}번 명언이 삭제되었습니다.")
                 }
             }
         }
