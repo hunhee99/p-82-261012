@@ -11,9 +11,14 @@ fun main() {
         // 명령 입력
         val input = readln()
 
-        // 종료
-        if (input == "종료"){
-            break
+        when (input) {
+            "종료" -> break
+            "등록" -> {
+                print("명언 : ")
+                val content = readln()
+                print("작가 : ")
+                val author = readln()
+            }
         }
     }
 }
